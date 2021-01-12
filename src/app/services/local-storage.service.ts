@@ -11,11 +11,7 @@ export class LocalStorageService {
     localStorage.setItem(key, value);
   }
 
-  getLocalStorage(key: string, value?: any) {
-    const getData = localStorage.getItem(key);
-    if(!getData) {
-      this.setLocalStorage(key, value);
-    }
+  getLocalStorage(key: string) {
     return JSON.parse(localStorage.getItem(key));
   }
 

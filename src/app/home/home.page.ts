@@ -1,6 +1,5 @@
-import { LocalStorageService } from './../services/local-storage.service';
-import { ThemeModeService } from './../services/theme-mode.service';
 import { Component, OnInit } from '@angular/core';
+import { ThemeModeService } from './../services/theme-mode.service';
 
 @Component({
   selector: 'app-home',
@@ -8,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit{
-  darkMode: boolean = false;
+  darkMode: boolean;
 
-  constructor(private themeModeService: ThemeModeService,
-              private localStorageService: LocalStorageService) {}
+  constructor(private themeModeService: ThemeModeService) {}
 
   ngOnInit() {
-    this.darkMode = this.localStorageService.getLocalStorage('darkMode', this.darkMode);      
-    this.themeModeService.setAppTheme(this.darkMode);
+    this.themeModeService.darkMode.subscribe(themeMode => {      
+      this.darkMode = themeMode;
+    })
   }
 
   changeMode() {

@@ -1,3 +1,5 @@
+import { LocalStorageService } from './services/local-storage.service';
+import { ThemeModeService } from './services/theme-mode.service';
 import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
@@ -13,7 +15,9 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private themeModeService: ThemeModeService,
+    private localStorageService: LocalStorageService
   ) {
     this.initializeApp();
   }
@@ -22,6 +26,10 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      if (this.localStorageService.getLocalStorage('darkMode')) {
+        this.themeModeService.setAppTheme(this.localStorageService.getLocalStorage('darkMode'));
+        this.themeModeService.darkMode.next(this.localStorageService.getLocalStorage('darkMode'));
+      }
     });
   }
 }
