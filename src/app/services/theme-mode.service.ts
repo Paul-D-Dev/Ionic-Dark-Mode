@@ -1,3 +1,4 @@
+import { LocalStorageService } from './local-storage.service';
 import { Platform } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 
@@ -5,9 +6,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ThemeModeService {
-  darkMode = false;
 
-  constructor(private platform: Platform) {
+  constructor(private platform: Platform,
+              private localStorageService: LocalStorageService) {
     this.platform.ready().then(() => {
       const preferDark = window.matchMedia('(prefers-color-scheme: dark)');
       
@@ -18,13 +19,12 @@ export class ThemeModeService {
    }
 
    toggleTheme(ev: any) {
-    this.darkMode = ev;
-    this.setAppTheme(this.darkMode)
+    this.setAppTheme(ev)
+    this.localStorageService.setLocalStorage('darkMode', ev)
    }
 
    setAppTheme(dark: boolean) {
-    this.darkMode = dark;
-    if(this.darkMode) {
+    if(dark) {
       document.body.classList.add('dark');
     } else {
       document.body.classList.remove('dark');
