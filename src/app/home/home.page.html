@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Dark Mode</ion-title>
+    <ion-buttons slot="end" (click)="changeMode()">
+      <ion-button>
+          <ion-icon name="{{darkMode? 'moon-outline': 'moon'}}"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-icon name="{{darkMode? 'moon-outline': 'moon'}}" slot="start"></ion-icon>
+    <ion-label>Toggle Dark Theme</ion-label>
+    <ion-toggle slot="end" (ionChange)="changeTheme($event)" [checked]="darkMode"></ion-toggle>
+
+  </ion-item>
+
+</ion-content>
