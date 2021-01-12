@@ -1,0 +1,7 @@
+{
+  "name": "ionic-dark-mode",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
